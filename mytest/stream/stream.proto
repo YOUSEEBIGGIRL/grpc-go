@@ -1,0 +1,18 @@
+syntax="proto3";
+option go_package ="/proto";
+
+// build: protoc --go_out=.  --go-grpc_out=. *.proto
+
+message StreamRequest {
+  string msg = 1;
+}
+
+message StreamResponse {
+  string msg = 1;
+}
+
+service Service {
+  rpc ClientStream(stream StreamRequest) returns (StreamResponse);
+  rpc ServerStream(StreamRequest) returns (stream StreamResponse);
+  rpc BidirectionalStream(stream StreamRequest) returns (stream StreamResponse);
+}
